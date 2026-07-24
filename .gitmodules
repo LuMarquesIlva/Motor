@@ -1,0 +1,7 @@
+[submodule "subprojects/SDL3"]
+	path = subprojects/SDL3
+	url = https://github.com/libsdl-org/SDL.git
+	branch = release-3.4.x
+[submodule "subprojects/BOX3D"]
+	path = subprojects/BOX3D
+	url = https://github.com/erincatto/box3d.git
