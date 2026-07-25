@@ -1,14 +1,29 @@
+#include <iostream>
 #include <VBO.h>
 
-VBO *_VBO;
-
-VBO::VBO(std::vector<float> vertices) {
-    std::vector<float> VertexBufferObject = VBOGen(1);
+VBO::VBO() {
+    B_ARRAY_BUFFER = {};
+    F_ARRAY_BUFFER = {};
 }
 
-// Generate the VBO
-std::vector<float> VBO::VBOGen(int BufferSize) {
-    int ActiveObjectBufferSize = _VBO->ActiveObjectBuffer->size();  // Get the ActiveObjectBuffer size
-    _VBO->ActiveObjectBuffer->reserve(ActiveObjectBufferSize+BufferSize);                  // Reserve the space based on the function input
-    return *_VBO->ActiveObjectBuffer;
+void VBO::VBOGenData(std::vector<float> vertices) {
+    BackObjectBuffer = vertices;
+    std::cout << "LOG: Generated VBO Data" << std::endl;
+}
+
+void VBO::Swap() {
+    F_ARRAY_BUFFER = B_ARRAY_BUFFER;
+    B_ARRAY_BUFFER.clear();
+};
+
+void VBO::Bind() {
+    F_ARRAY_BUFFER.at(BackObjectBufferSize-1);
+}
+
+void VBO::Unbind() {
+    F_ARRAY_BUFFER.clear();
+}
+
+void VBO::Delete() {
+    F_ARRAY_BUFFER.resize(0);
 }

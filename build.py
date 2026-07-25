@@ -9,8 +9,20 @@ SETTINGSLIST = [
     ["builddir", "dist"],
     ["reconf", False],
     ["wipe", False],
-    ["configureSubmodule", True],
+    ["configureSubmodule", False],
+    ["configureProject", False],
 ]
+
+def isEveryOptionFalse():
+    SettingsBool = []
+    for Setting in SETTINGSLIST:
+        if type(Setting[1]) is bool:
+            SettingsBool.append(Setting[1])
+
+    if SettingsBool.count(False) == 4:
+        return True
+    else:
+        return False
 
 
 def run_meson_build(build_dir=SETTINGSLIST[0]):
@@ -28,6 +40,7 @@ def run_meson_build(build_dir=SETTINGSLIST[0]):
       {SETTINGSLIST[1][0]} : {SETTINGSLIST[1][1]}
       {SETTINGSLIST[2][0]} : {SETTINGSLIST[2][1]}
       {SETTINGSLIST[3][0]} : {SETTINGSLIST[3][1]}
+      {SETTINGSLIST[4][0]} : {SETTINGSLIST[4][1]}
     """
     )
 
@@ -45,7 +58,7 @@ def run_meson_build(build_dir=SETTINGSLIST[0]):
             if submoduleError is False:
                 print(f"\n{GREEN}-- Submodules Configured --{RESET}\n")
 
-    if SETTINGSLIST[1][1] is False and SETTINGSLIST[2][1] is False:
+    if SETTINGSLIST[1][1] is False and SETTINGSLIST[2][1] is False and SETTINGSLIST[4][1] is True:
         try:
             setup_cmd = ["meson", "setup", SETTINGSLIST[0][1]]
             print(f"\nRunning: {RED}{' '.join(setup_cmd)}{RESET}\n")
@@ -66,6 +79,8 @@ def run_meson_build(build_dir=SETTINGSLIST[0]):
             subprocess.run(setup_cmd, check=True)
         finally:
             print(f"\n{GREEN}-- Project Configured --{RESET}")
+    elif isEveryOptionFalse():
+        pass
     else:
         raise RuntimeError("-- Uncheck either <reconf> or <wipe> to proceed --")
 

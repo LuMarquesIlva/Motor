@@ -2,9 +2,17 @@
 
 #include <Motor.h>
 
-Motor _Motor;
+Motor motor;
+VBO vbo;
 
-float vertices[] = {
+std::vector<float> vertices = {
+  // pos              // color
+  0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
+  -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
+  0.0f, 0.5f, 0.0f,  0.0f, 0.0f, 1.0f     // top left
+};
+
+float Vert[] {
   // pos              // color
   0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
   -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
@@ -13,7 +21,17 @@ float vertices[] = {
 
 int main(void)
 {
-  int initVal = _Motor.InitWindow();
+  vbo.VBOGenData(vertices);
 
-  return initVal;
+  while (motor.ShouldQuit != true) {
+    motor.Update();
+  }
+  
+
+  SDL_DestroyRenderer(motor.ren);
+  SDL_DestroyWindow(motor.win);
+
+  SDL_Quit();
+
+  return 0;
 }
