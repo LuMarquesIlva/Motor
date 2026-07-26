@@ -2,12 +2,12 @@
 #include <VBO.h>
 
 VBO::VBO() {
-    B_ARRAY_BUFFER = {};
-    F_ARRAY_BUFFER = {};
+    B_ARRAY_BUFFER = {0.0f};
+    F_ARRAY_BUFFER = {0.0f};
 }
 
-void VBO::VBOGenData(std::vector<float> vertices) {
-    BackObjectBuffer = vertices;
+void VBO::VBOGenData(Vector vertices) {
+    BackObjectBuffer = vertices.GetFVector();
     std::cout << "LOG: Generated VBO Data" << std::endl;
 }
 

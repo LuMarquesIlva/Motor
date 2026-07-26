@@ -12,6 +12,10 @@ sdl3_dep = sdl3_proj.dependency('SDL3-shared')
 box3d_dep = box3d_proj.dependency('box3d')
 
 inc = include_directories('include')
-src = ['src/main.cpp', 'src/Motor.cpp', 'src/VBO.cpp']
+src = [
+    'src/main.cpp',
+    'src/Motor.cpp',
+    'src/VBO.cpp',
+    ]
 
 executable(meson.project_name(), src, dependencies: [sdl3_dep, box3d_dep], include_directories: inc)

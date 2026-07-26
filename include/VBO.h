@@ -1,16 +1,16 @@
 #pragma once
-#define F_ARRAY_BUFFER VBO::FrontObjectBuffer
-#define B_ARRAY_BUFFER VBO::BackObjectBuffer
+#define F_ARRAY_BUFFER VBO::FrontObjectBuffer.GetFVector()
+#define B_ARRAY_BUFFER VBO::BackObjectBuffer.GetFVector()
 
-#include <vector>
+#include <Vector.h>
 
 class VBO {
     public:
         VBO();
-        void VBOGenData(std::vector<float> vertices);
+        void VBOGenData(Vector vertices);
 
-        std::vector<float> FrontObjectBuffer;
-        std::vector<float> BackObjectBuffer;
+        Vector FrontObjectBuffer;
+        Vector BackObjectBuffer;
         int FrontObjectBufferSize;
         int BackObjectBufferSize;
 
