@@ -8,8 +8,9 @@
 #include <SDL3/SDL.h>
 
 #include <VBO.h>
+#include <VAO.h>
+#include <Vector.h>
 
-class VBO;
 class Motor;
 
 class Motor {
@@ -18,26 +19,28 @@ class Motor {
         SDL_Renderer *ren;
         SDL_Event evnt;
 
-        bool ShouldQuit = false;
-        int Width = 800;
-        int Height = 600;
+        bool ShouldQuit = false; // Variável de Saída
+        int Width = 800; // Largura da Janela
+        int Height = 600; // Altura da Janela
 
-        // Main Functions
+        // Funções Principais
 
-        // -- Initialize A Basic Window --
+        // -- Construtor Para Iniciar Uma Janela Básica --
         Motor();
 
-        // Update
+        // Atualiza Por Frame
         void Update();
 
-        // Utilities Function
+        // Funções de Utilidade
 
-        // Converts Vector To String (<Float Vector>, <Delimiter ex. ", ">)
+        // Converte Vetor Para String (<Float Vector>, <Delimitador ex. ", ">)
         std::string ConvertVectorToString(const std::vector<float>& vec, const std::string& delim = ", ");
+        std::string ConvertVectorToString(const Vector vec, const std::string& delim = ", ");
         
-        // Converts Array To Vector TODO: FIX
+        // Converte Array Para Vetor TODO: CONSERTAR
         std::vector<float> ConvertArrayToVector(float array[]);
         
-        // Print A Vector
+        // Imprime Um Vetor
         void PrintVector(std::vector<float> vec);
+        void PrintVector(Vector vec);
 };

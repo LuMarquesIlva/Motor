@@ -2,8 +2,8 @@
 #include <VBO.h>
 
 VBO::VBO() {
-    B_ARRAY_BUFFER = {0.0f};
-    F_ARRAY_BUFFER = {0.0f};
+    this->B_ARRAY_BUFFER = {0.0f};
+    this->F_ARRAY_BUFFER = {0.0f};
 }
 
 void VBO::VBOGenData(Vector vertices) {
@@ -12,8 +12,9 @@ void VBO::VBOGenData(Vector vertices) {
 }
 
 void VBO::Swap() {
-    F_ARRAY_BUFFER = B_ARRAY_BUFFER;
-    B_ARRAY_BUFFER.clear();
+    this->F_ARRAY_BUFFER.clear();
+    this->F_ARRAY_BUFFER = this->B_ARRAY_BUFFER;
+    this->B_ARRAY_BUFFER.clear();
 };
 
 void VBO::Bind() {

@@ -4,7 +4,9 @@
 
 #include <Vector.h>
 
-class VBO {
+class VBO;
+
+class VBO : public Vector{
     public:
         VBO();
         void VBOGenData(Vector vertices);

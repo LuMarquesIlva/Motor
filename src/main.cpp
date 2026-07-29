@@ -3,7 +3,6 @@
 #include <Motor.h>
 
 Motor motor;
-VBO vbo;
 
 std::vector<float> vertices = {
   // pos              // color
@@ -21,12 +20,10 @@ float Vert[] {
 
 int main(void)
 {
-  vbo.VBOGenData(vertices);
 
   while (motor.ShouldQuit != true) {
     motor.Update();
   }
-  
 
   SDL_DestroyRenderer(motor.ren);
   SDL_DestroyWindow(motor.win);
