@@ -20,6 +20,7 @@ float Vert[] {
 
 int main(void)
 {
+  motor.Init();
 
   while (motor.ShouldQuit != true) {
     motor.Update();

@@ -3,7 +3,7 @@ name = "motor"
 version = "0.0.1"
 description = "Motor"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.13"
 dependencies = []
 
 [dependency-groups]
