@@ -1,16 +1,19 @@
 #!.venv/bin/python
 import subprocess
+import sys
+from pathlib import Path
+sys.tracebacklimit = 0
 
 RED = "\033[91m"
 GREEN = "\033[92m"
 RESET = "\033[0m"
 
 SETTINGSLIST = [
-    ["builddir", "dist"],
+    ["builddir", "build"],
     ["reconf", False],
     ["wipe", False],
-    ["configureSubmodule", False],
-    ["configureProject", False],
+    ["configureSubmodule", True],
+    ["configureProject", True],
 ]
 
 def isEveryOptionFalse():
@@ -23,6 +26,11 @@ def isEveryOptionFalse():
         return True
     else:
         return False
+
+def CheckForFolder(_path = ""):
+    folderPath=Path(_path)
+    if not folderPath.is_dir():
+        raise FileNotFoundError(f"Directory Does Not Exist; Enable Both Configure Submodule and Configure Project or Reconf")
 
 
 def run_meson_build(build_dir=SETTINGSLIST[0]):
@@ -84,13 +92,15 @@ def run_meson_build(build_dir=SETTINGSLIST[0]):
     else:
         raise RuntimeError("-- Uncheck either <reconf> or <wipe> to proceed --")
 
+    CheckForFolder(SETTINGSLIST[0][1])
+
     # 2. Build the project (equivalent to 'ninja -C build' or 'meson compile -C build')
     try:
         compile_cmd = ["meson", "compile", "-C", SETTINGSLIST[0][1]]
         print(f"\nRunning: {RED}{' '.join(compile_cmd)}{RESET}\n")
         subprocess.run(compile_cmd, check=True)
-    except RuntimeError:
-        raise RuntimeError(f"Something Went Wrong During Compilation!")
+    except:
+        raise RuntimeError(f"\nCould Not Compile\n")
 
 
 if __name__ == "__main__":

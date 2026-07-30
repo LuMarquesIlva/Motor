@@ -7,8 +7,6 @@
 
 #include <SDL3/SDL.h>
 
-#include <VBO.h>
-#include <VAO.h>
 #include <Vector.h>
 
 class Motor;
@@ -18,11 +16,20 @@ class Motor {
         SDL_Window *win;
         SDL_Renderer *ren;
         SDL_Event evnt;
-
+        SDL_GPUDevice *GPUDev;
+        
         bool ShouldQuit = false; // Variável de Saída
         int Width = 800; // Largura da Janela
         int Height = 600; // Altura da Janela
         Vector BackgroundColor = {100, 100, 100, 255};
+
+        float Triangle[18] {
+            // pos              // color
+            0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
+            -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  // bottom left
+            0.0f, 0.5f, 0.0f,  0.0f, 0.0f, 1.0f     // top left
+        };
+
 
         // Funções Principais
 

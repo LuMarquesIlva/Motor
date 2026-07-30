@@ -1,23 +1,22 @@
 #pragma once
-#define F_ARRAY_BUFFER VBO::FrontObjectBuffer.GetFVector()
-#define B_ARRAY_BUFFER VBO::BackObjectBuffer.GetFVector()
+#define VERTEX_BUFFER VBO::VertexBuffer
 
 #include <Vector.h>
+#include <Motor.h>
 
 class VBO;
 
+Motor _motor;
+
 class VBO : public Vector{
     public:
-        VBO();
-        void VBOGenData(Vector vertices);
+        SDL_GPUCommandBuffer *CommandBuffer = SDL_AcquireGPUCommandBuffer(_motor.GPUDev);
+        
+        VBO()
 
-        Vector FrontObjectBuffer;
-        Vector BackObjectBuffer;
-        int FrontObjectBufferSize;
-        int BackObjectBufferSize;
-
-        void Swap();
-        void Bind();
+        void Bind() {
+            SDL_BindGPUVertexBuffers()
+        };
         void Unbind();
         void Delete();
 };

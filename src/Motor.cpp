@@ -12,7 +12,7 @@ void Motor::Init() {
     }
 
     // Cria o Dispositivo de GPU
-    SDL_GPUDevice *GPUDev = SDL_CreateGPUDevice(SDL_GPU_SHADERFORMAT_SPIRV, false, NULL);
+    GPUDev = SDL_CreateGPUDevice(SDL_GPU_SHADERFORMAT_SPIRV, false, NULL);
     if (!GPUDev) {
         SDL_Log("LOG: Could Not Initialize GPU: %s", SDL_GetError());
         SDL_Log("LOG: GPU HINT: %s", SDL_HINT_GPU_DRIVER);
@@ -28,6 +28,11 @@ void Motor::Init() {
         SDL_Quit();
         ShouldQuit = true;
     };
+    if (!SDL_ClaimWindowForGPUDevice(GPUDev, win)) {
+        SDL_Log("LOG: GPU Could Not Claim Window: %s", SDL_GetError());
+        SDL_Quit();
+        ShouldQuit = true;
+    }
 
     ren = SDL_CreateGPURenderer(GPUDev, win);
     if (!ren) {
